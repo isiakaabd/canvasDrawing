@@ -1,0 +1,1 @@
+CANVAS Drawing App is an application that make use of Canvas with to draw graphics using javascript. It can be used to draw images. The App can Draw ("2D"), Undo, Erase and Change colors to suit the user's   </p>
