@@ -2,13 +2,15 @@
     box-sizing: border-box;
 }
 body{
-/* overflow: hidden; */
-display: flex;
-justify-content: center;
-height: 100vh;
-align-items: center;
-flex-direction: column;
-margin: 0;
+    display: flex;
+    background: #f3f3f3;
+    justify-content: center;
+    height: 100vh;
+    font-family: cursive;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+    overflow: hidden;
 }
 
 
@@ -37,7 +39,7 @@ canvas{
     align-items: center;
     margin: .35rem;
     font-size: 2rem;
-    border: 0;
+    border: none;
     cursor: pointer;
 }
 
@@ -49,7 +51,7 @@ canvas{
 .box >*:last-child::before,
 .box >*:last-child::after{
     content: "";
-    width: 8px;
+    width: 5px;
     height:  calc(50px - 5px);
     position: absolute;
 
