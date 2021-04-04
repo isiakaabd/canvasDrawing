@@ -15,7 +15,8 @@ body{
     align-items: center;
     flex-direction: column;
     margin: 0;
-    /* overflow: hidden; */
+    background-color: #f3f3f3;
+    overflow: hidden;
 }
 
 
@@ -23,7 +24,10 @@ canvas{
     border: 2px solid brown;
     max-width: 100%;
 }
-
+i{
+    color: green !important;
+    
+}
 
 .box{
     display: flex;
@@ -32,16 +36,16 @@ canvas{
     height: 100px;
     width:500px;
     max-width: 100%;
-    /* width: 804px; */
     background-color: steelblue;
-    border: 1px brown solid;
+    border: 2px brown solid;
 }
 .box > *{
-    background-color: red;
+    background-color: lemonchiffon;
     width: var(--size);
     height: var(--size);
     text-align: center;
     padding: .35rem;
+    border-radius: 3px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -73,6 +77,6 @@ canvas{
 }
 
 .box >*:last-child::after{
-    background-color: yellow;
+    background-color: red;
     transform: rotate(-45deg);
     }

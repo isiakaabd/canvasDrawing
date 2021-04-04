@@ -22,12 +22,12 @@ canvas.addEventListener("mouseout", stopDraw )
 const ctx = canvas.getContext("2d");
 let isPressed = false;
 var size = 2;
-var  color = "black"
+var color = "black"
 let x;
 let y;
 
-let index = -1
 let restore_array = [];
+let index = -1;
 
 
 
@@ -35,8 +35,6 @@ let restore_array = [];
 // when mouse is up or out of board
 function stopDraw(e){
     e.preventDefault()
-    x = undefined;
-    y = undefined
     if (isPressed) {
         ctx.stroke()
         ctx.closePath()
@@ -47,7 +45,6 @@ function stopDraw(e){
         index += 1
 
     }
-console.log(restore_array)
 }
 
 
@@ -60,7 +57,7 @@ function draw(e){
     const y2 = e.offsetY
 
     drawLine(x, y, x2,y2)
-    drawCircle(x2, y2)
+    // drawCircle(x2, y2)
         x = x2;
         y = y2
     }
@@ -71,7 +68,7 @@ function draw(e){
 // the size was divided by two to reduce having too much circle in tyhe straight line
 function drawCircle(x, y) {
     ctx.beginPath()
-    ctx.arc(x, y, size/2, 0 , Math.PI * 2)
+    ctx.arc(x, y, size/4, 0 , Math.PI * 2)
     ctx.fillStyle = color
     ctx.fill()
 }
@@ -81,7 +78,7 @@ function drawLine(x1,y1 ,x2,y2) {
     ctx.moveTo(x1, y1);
     ctx.lineTo(x2, y2)
     ctx.strokeStyle = color;
-    ctx.lineWidth = size;
+    ctx.lineWidth = size *2;
     ctx.lineCap="round"   // Draw a line with rounded end caps:
     ctx.lineJoin = "round" // Create a rounded corner when the two lines meet
     ctx.stroke()
@@ -95,14 +92,14 @@ function updateSize(){
 
 // button
 increase.addEventListener("click",()=>{
-    size += 5
-    if (size  >50){
-        size = 50
+    size += 2
+    if (size  >10){
+        size = 10
     }
     updateSize()
 })
 decrease.addEventListener("click",()=>{
-    size -= 5
+    size -= 2
     if (size < 5){
         size = 5
     }
@@ -128,7 +125,6 @@ function startDraw(e){
 
 function clearRect(){
     ctx.clearRect(0,0, canvas.width, canvas.height)
-    ctx.fillRect(0,0, canvas.width, canvas.height)
     restore_array= []
     index = -1
 }
@@ -143,8 +139,8 @@ function undoLast(){
     clearRect()
 
     } else {
-        index += 1;
+        index -= 1;
         restore_array.pop();
-        ctx.putImageData(restore_array, 0, 0)
+        ctx.putImageData(restore_array[index], 0, 0)
     }
 }
