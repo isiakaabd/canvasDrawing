@@ -25,19 +25,19 @@ canvas.addEventListener("mouseup" , (e) => {
 x= undefined;
 y =undefined
 
-isPressed=FALSE
+isPressed=false
 
 
 })
 
 canvas.addEventListener("mousemove" , (e) => {
     if(isPressed){
-    var x2 = e.offsetX;
-    var y2 = e.offsetY
+    const x2 = e.offsetX;
+    const y2 = e.offsetY
 
 
     drawCircle(x2, y2)
-    drawLine(x2,y2)
+    drawLine(x, y, x2,y2)
     x=x2;
     y=y2
     }
@@ -46,9 +46,9 @@ canvas.addEventListener("mousemove" , (e) => {
 // to draw a circle
 function drawCircle(x,y) {
     ctx.beginPath()
-    ctx.arc(x, y, size, 0 , Math.PI*2)
+    ctx.arc(x, y, size, 0 , Math.PI * 2)
     ctx.fillStyle= color
-    ctx.stroke()
+    // ctx.stroke()
     ctx.fill()
 }
 
@@ -56,8 +56,8 @@ function drawLine(x1,y1 ,x2,y2) {
     ctx.beginPath()
     ctx.moveTo(x1,y1);
     ctx.lineTo(x2,y2)
-    ctx.fillStyle= color
-    ctx.strokeStyle = black
+    ctx.strokeStyle = black;
+    ctx.lineWidth = size * 2
     ctx.stroke()
 }
 
@@ -66,3 +66,27 @@ function drawLine(x1,y1 ,x2,y2) {
 function updateSize(){
     value.innerHTML = size
 }
+
+// button
+increase.addEventListener("click",()=>{
+    size+=2
+    if (size  >30){
+        size =30
+    }
+    updateSize()
+})
+decrease.addEventListener("click",()=>{
+    size-=2
+    if (size  <2){
+        size =2
+    }
+    updateSize()
+})
+colorEl.addEventListener("change",(e)=> {
+color= e.target.value
+})
+
+
+clear.addEventListener("click", ()=>{
+    ctx.clearRect(0,0, canvas.width, canvas.height)
+})
