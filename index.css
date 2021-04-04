@@ -1,0 +1,66 @@
+*::before,*::after,*{
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+/* overflow: hidden; */
+display: flex;
+justify-content: center;
+height: 100vh;
+align-items: center;
+flex-direction: column;
+}
+
+
+canvas{
+    border: 2px solid brown;
+    width: 100%;
+}
+.box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 804px;
+    background-color: steelblue;
+    border: 1px brown solid;
+}
+.box *{
+    background-color: red;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    padding: .35rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: .35rem;
+    font-size: 2rem;
+    border: 0;
+    cursor: pointer;
+}
+
+.box >*:last-child{
+    margin-left: 50px;
+    position: relative;
+}
+
+.box >*:last-child::before,
+.box >*:last-child::after{
+    content: "";
+    width: 8px;
+    height:  calc(50px - 5px);
+    position: absolute;
+
+}
+
+.box >*:last-child::before{
+
+    background-color: green;
+    transform: rotate(45deg);
+}
+
+.box >*:last-child::after{
+    background-color: yellow;
+    transform: rotate(-45deg);
+    }
