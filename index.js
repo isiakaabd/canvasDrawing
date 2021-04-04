@@ -6,6 +6,18 @@ const colorEl = document.getElementById("color")
 const clear = document.getElementById("clear")
 const undoBtn = document.getElementById("undo")
 
+// start
+canvas.addEventListener("touchstart",startDraw)
+canvas.addEventListener("mousedown" , startDraw)
+
+// draw
+canvas.addEventListener("touchmove", draw )
+canvas.addEventListener("mousemove", draw )
+// stop
+canvas.addEventListener("touchend", stopDraw )
+canvas.addEventListener("mouseup", stopDraw )
+canvas.addEventListener("mouseout", stopDraw )
+
 
 const ctx = canvas.getContext("2d");
 let isPressed = false;
@@ -15,19 +27,12 @@ let x;
 let y;
 
 let index = -1
-let restore_array =[];
+let restore_array = [];
 
-canvas.addEventListener("touchstart",startDraw)
-canvas.addEventListener("mousedown" , startDraw)
-canvas.addEventListener("touchmove", draw )
-canvas.addEventListener("mousemove", draw )
-canvas.addEventListener("touchend", stopDraw )
-canvas.addEventListener("mouseup", stopDraw )
-canvas.addEventListener("mouseout", stopDraw )
 
-canvas.addEventListener("mouseup" ,stopDraw)
-canvas.addEventListener("mousemove" , draw)
 
+
+// when mouse is up or out of board
 function stopDraw(e){
     e.preventDefault()
     x = undefined;
@@ -37,14 +42,17 @@ function stopDraw(e){
         ctx.closePath()
         isPressed = false
     }
-    if(e.type !="mouseout"){
+    if(e.type != "mouseout"){
         restore_array.push(ctx.getImageData(0,0, canvas.width, canvas.height))
-        index+=1
+        index += 1
 
     }
 console.log(restore_array)
 }
-// mouse moive
+
+
+
+// mouse move
 function draw(e){
     e.preventDefault()
     if (isPressed) {
@@ -60,13 +68,14 @@ function draw(e){
 
 
 // to draw a circle
+// the size was divided by two to reduce having too much circle in tyhe straight line
 function drawCircle(x, y) {
     ctx.beginPath()
     ctx.arc(x, y, size/2, 0 , Math.PI * 2)
     ctx.fillStyle = color
     ctx.fill()
 }
-
+// draw a straight line
 function drawLine(x1,y1 ,x2,y2) {
     ctx.beginPath()
     ctx.moveTo(x1, y1);
@@ -119,21 +128,23 @@ function startDraw(e){
 
 function clearRect(){
     ctx.clearRect(0,0, canvas.width, canvas.height)
-    restore_array=[]
+    ctx.fillRect(0,0, canvas.width, canvas.height)
+    restore_array= []
     index = -1
 }
 
 // undo last action
-undoBtn.addEventListener("click", undo)
+undoBtn.addEventListener("click", undoLast)
 
 
 
-function undo(){
-    if(index<=0){
+function undoLast(){
+    if(index <= 0){
     clearRect()
-    }else{
-        index +=1
-        restore_array.pop()
-        ctx.putImageData(restore_array[index], 0,0)
+
+    } else {
+        index += 1;
+        restore_array.pop();
+        ctx.putImageData(restore_array, 0, 0)
     }
 }
