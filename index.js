@@ -22,16 +22,16 @@ canvas.addEventListener("mousedown" , (e)=>{
 
 
 canvas.addEventListener("mouseup" , (e) => {
-x= undefined;
-y =undefined
+    isPressed=false
+    x= undefined;
+    y =undefined
 
-isPressed=false
 
 
 })
 
 canvas.addEventListener("mousemove" , (e) => {
-    if(isPressed){
+    if (isPressed) {
     const x2 = e.offsetX;
     const y2 = e.offsetY
 
@@ -44,18 +44,17 @@ canvas.addEventListener("mousemove" , (e) => {
 })
 
 // to draw a circle
-function drawCircle(x,y) {
+function drawCircle(x, y) {
     ctx.beginPath()
     ctx.arc(x, y, size, 0 , Math.PI * 2)
     ctx.fillStyle= color
-    // ctx.stroke()
     ctx.fill()
 }
 
 function drawLine(x1,y1 ,x2,y2) {
     ctx.beginPath()
-    ctx.moveTo(x1,y1);
-    ctx.lineTo(x2,y2)
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2)
     ctx.strokeStyle = black;
     ctx.lineWidth = size * 2
     ctx.stroke()
@@ -64,12 +63,12 @@ function drawLine(x1,y1 ,x2,y2) {
 
 //update size on the screen
 function updateSize(){
-    value.innerHTML = size
+    value.innerText = size
 }
 
 // button
 increase.addEventListener("click",()=>{
-    size+=2
+    size += 2
     if (size  >30){
         size =30
     }
