@@ -53,9 +53,21 @@ function stopDraw(e){
 function draw(e){
     e.preventDefault()
     if (isPressed) {
-    const x2 =e.offsetX
-    const y2 = e.offsetY
+        if(e.type=="mousemove"){
+            var x2 = e.offsetX 
+            var y2 = e.offsetY
+        }
+        else if(e.type== "touchmove"){
+            var rect = e.target.getBoundingClientRect();
+            console.log(rect)
+            var x2 = e.targetTouches[0].pageX - rect.left ;
+            var y2 = e.targetTouches[0].pageY  //- rect.top;
+            console.log(x2,y2)
+        }
+   
 
+// console.log(( e.touches[0].pageX + canvas.offsetLeft), "( e.touches[0].pageX + canvas.offsetLeft)")
+// clientX
     drawLine(x, y, x2,y2)
     // drawCircle(x2, y2)
         x = x2;
@@ -118,11 +130,17 @@ clear.addEventListener("click", clearRect)
 
 //start drawCircle
 function startDraw(e){
+    e.preventDefault()
+    var rect = e.target.getBoundingClientRect()
     isPressed=true
-    x = e.offsetX;
-    y = e.offsetY
-}
+    var touch = e.touches[0];
+// var x = 
+// var y = ;
 
+    x = e.offsetX || ( touch.pageX - e.offsetLeft)//+ rect.left );
+    y = e.offsetY|| ( touch.pageY  - canvas.offsetTop)//-rect.top ); //-+rect.top
+    console.log(e.offsetLeft)
+}
 function clearRect(){
     ctx.clearRect(0,0, canvas.width, canvas.height)
     restore_array= []
