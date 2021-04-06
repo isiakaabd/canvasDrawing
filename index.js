@@ -56,25 +56,23 @@ function draw(e){
         if(e.type=="mousemove"){
             var x2 = e.offsetX 
             var y2 = e.offsetY
+            console.log(x2+ "love")
         }
         else if(e.type== "touchmove"){
-            var rect = e.target.getBoundingClientRect();
-            console.log(rect)
-            var x2 = e.targetTouches[0].pageX - rect.left ;
-            var y2 = e.targetTouches[0].pageY  //- rect.top;
-            console.log(x2,y2)
+          //  var rect = e.target.getBoundingClientRect()
+            var x2= e.touches[0].clientX
+            var y2= e.touches[0].clientY
         }
    
 
 // console.log(( e.touches[0].pageX + canvas.offsetLeft), "( e.touches[0].pageX + canvas.offsetLeft)")
 // clientX
     drawLine(x, y, x2,y2)
-    // drawCircle(x2, y2)
+
         x = x2;
         y = y2
     }
 }
-
 
 // to draw a circle
 // the size was divided by two to reduce having too much circle in tyhe straight line
@@ -88,10 +86,11 @@ function drawCircle(x, y) {
 function drawLine(x1,y1 ,x2,y2) {
     ctx.beginPath()
     ctx.moveTo(x1, y1);
+
     ctx.lineTo(x2, y2)
     ctx.strokeStyle = color;
     ctx.lineWidth = size *2;
-    ctx.lineCap="round"   // Draw a line with rounded end caps:
+    ctx.lineCap=   "round"   // Draw a line with rounded end caps:
     ctx.lineJoin = "round" // Create a rounded corner when the two lines meet
     ctx.stroke()
 }
@@ -133,13 +132,13 @@ function startDraw(e){
     e.preventDefault()
     var rect = e.target.getBoundingClientRect()
     isPressed=true
-    var touch = e.touches[0];
+    //var touch = e.touches[0];
 // var x = 
 // var y = ;
 
-    x = e.offsetX || ( touch.pageX - e.offsetLeft)//+ rect.left );
-    y = e.offsetY|| ( touch.pageY  - canvas.offsetTop)//-rect.top ); //-+rect.top
-    console.log(e.offsetLeft)
+    x = e.offsetX //|| //( touch.pageX - canvas.offsetLeft)//+ rect.left );
+    y = e.offsetY //|| //( touch.pageY  - canvas.offsetTop)//-rect.top ); //-+rect.top
+
 }
 function clearRect(){
     ctx.clearRect(0,0, canvas.width, canvas.height)
