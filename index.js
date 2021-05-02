@@ -33,6 +33,10 @@ let y;
 // for touch move
 let u;
 let v
+var x2;
+var y2
+let x3;
+let y3
 
 let restore_array = [];
 let index = -1;
@@ -70,10 +74,7 @@ function stopDrawing(e){
 }
 
 
-var x2;
-var y2
-let x3;
-let y3
+
 
 
 
@@ -107,7 +108,7 @@ function draw(e){
         
    
 
-    // clientX
+    // clientX for mouse
     drawLine(x, y, x2,y2)
 
         x = x2;
@@ -205,14 +206,14 @@ redoBtn.addEventListener("click", redoLast)
 
 
 
-var c;
+// var c;
 function undoLast(){
     if(index <= 0){
     clearRect()
 
     } else {
         index -= 1;
-       c=  restore_array.pop();
+        restore_array.pop();
         ctx.putImageData(restore_array[index], 0, 0)
     }
     
@@ -224,7 +225,6 @@ console.log("c")
 
 // for touches
 function draww(u,v ,x3,y3) {
-   console.log(u,v,x3,y3) 
     ctx.beginPath()
     ctx.moveTo(u, v);
     ctx.lineTo(x3, y3)
